@@ -16,12 +16,12 @@ export default class Signin extends Component {
             isOnState: true
         }
     }
-    // _isChangeState = () => {
-    //     const { isOnState }=this.state
-    //     this.setState({isOnState :!isOnState});
-    //     isOn={isOnState}
-    //     console.warn(isOnState)
-    // }
+    _isChangeState = () => {
+        const { isOnState }=this.state
+        this.setState({isOnState :!isOnState});
+        // isOn={isOnState}
+        console.warn(isOnState)
+    }
 
     async componentWillMount() {
         this.setState({ getemail: await AsyncStorage.getItem(KEY_USER_MAIL) });
@@ -76,13 +76,13 @@ export default class Signin extends Component {
                     </View> */}
                     <View style={ToggleSwitchView}>
                         <ToggleSwitch
-                            isOn={true}
+                            isOn={this.state.isOnState}
                             onColor='#00DE62'
                             offColor='gray'
                             label='Save Password'
                             labelStyle={{ color: 'black', fontWeight: '900' }}
                             size='medium'
-                            onToggle={(isOn) => console.log('changed to : ', isOn)}
+                            onToggle={this._isChangeState}
                         />
                     </View>
                     <View style={ButtonArea}>
