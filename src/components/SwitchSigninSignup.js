@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, TouchableOpacity, StyleSheet, Text } from 'react-native'
+import { View, TouchableOpacity, StyleSheet, Text, AsyncStorage } from 'react-native'
 
 export default class SwitchSigninSignup extends Component {
     constructor(props){
@@ -11,16 +11,18 @@ export default class SwitchSigninSignup extends Component {
         }
     }
     _onHideUnderlay = () => {
-        const {signInPressStatus} = this.state
+        let signInPressStatus = true;
         // console.warn(this.state.signInPressStatus);
-        this.setState({ signInPressStatus: true });
-        this.props.onChange({signInPressStatus})
+        // let change = true;
+        this.setState({ signInPressStatus });
+        this.props.onChange(signInPressStatus)
     }
     _onShowUnderlay = () => {
-        const {signInPressStatus} = this.state
+        let signInPressStatus = false;
         // console.warn("true");
-        this.setState({ signInPressStatus: false });
-        this.props.onChange({signInPressStatus})
+        // let change = false;
+        this.setState({ signInPressStatus });
+        this.props.onChange(signInPressStatus)
     }
     render() {
         const { signInPressStatus, RightText, LeftText} = this.state

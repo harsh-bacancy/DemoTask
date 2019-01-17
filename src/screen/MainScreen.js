@@ -10,7 +10,7 @@ export default class MainScreen extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            signInPressStatus: false
+            signInPressStatus: true
         }
     }
 
@@ -28,7 +28,7 @@ export default class MainScreen extends Component {
                     </View>
                     <SwitchSigninSignup
                         signInPressStatus={this.state.signInPressStatus}
-                        onChange={({ signInPressStatus }) => this.setState({ signInPressStatus })}
+                        onChange={(signInPressStatus) => this.setState({ signInPressStatus })}
                         RightText='Sign Up'
                         LeftText='Sign In'
                     />
@@ -48,7 +48,7 @@ export default class MainScreen extends Component {
 const styles = StyleSheet.create({
     MainScreen: {
         flex: 1,
-        backgroundColor: 'gray',
+        backgroundColor: '#FFF',
     },
     Header: {
         flex: .5,

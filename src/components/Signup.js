@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, TextInput, TouchableOpacity, Image, StyleSheet, Text, } from 'react-native'
+import { View, TextInput, TouchableOpacity, Image, StyleSheet, Text, AsyncStorage } from 'react-native'
 import InputField from '../components/InputField'
 import SwitchSigninSignup from '../components/SwitchSigninSignup'
 import DateTimePicker from 'react-native-modal-datetime-picker'
@@ -18,8 +18,11 @@ export default class Signup extends Component {
         }
     }
     _signInAsync = async () => {
-        await AsyncStorage.setItem(KEY_USER_MAIL, this.state.email);
-        await AsyncStorage.setItem(KEY_USER_PASSWORD, this.state.password);
+        const { email, password} = this.state
+        console.warn(this.state.email)
+        console.warn(this.state.password)
+        await AsyncStorage.setItem(KEY_USER_MAIL, email);
+        await AsyncStorage.setItem(KEY_USER_PASSWORD, password);
         Actions.mainscreen();
     };
     _showDateTimePicker = () => this.setState({ isDateTimePickerVisible: true });
@@ -77,8 +80,9 @@ export default class Signup extends Component {
                     </View>
                     <View style={EmailInput}>
                         <TextInput
+                            style={{ width:'90%' }}
                             placeholder='Email Address'
-                            onChangeText={({ email }) => this.setState({ email })}
+                            onChangeText={( email ) => this.setState({ email })}
                             value={this.state.email}
                         />
                         <Image
@@ -90,8 +94,9 @@ export default class Signup extends Component {
                     <View style={PasswordInput}>
                         <Text>Password:</Text>
                         <TextInput
+                            style={{ width:'80%' }}
                             placeholder='***'
-                            onChangeText={({ password }) => this.setState({ password })}
+                            onChangeText={( password ) => this.setState({ password })}
                             value={this.state.password}
                         />
                     </View>
