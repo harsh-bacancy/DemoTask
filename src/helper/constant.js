@@ -1,0 +1,2 @@
+export const KEY_USER_MAIL='KEY_USER_MAIL';
+export const KEY_USER_PASSWORD='KEY_USER_PASSWORD';
