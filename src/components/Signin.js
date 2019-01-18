@@ -32,7 +32,7 @@ export default class Signin extends Component {
             Actions.thankyou();
         }
         else {
-            console.warn('email:',this.state.getemail,' password:', this.state.getpassword);
+            console.warn('email:',this.state.getemail,' password', this.state.getpassword);
             Actions.mainscreen();
         }
     };

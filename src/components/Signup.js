@@ -27,14 +27,14 @@ export default class Signup extends ValidationComponent {
     }
 
     _validateData = () => {
-        let {signInPressStatus} =this.state
+        // let {signInPressStatus} =this.state
         {
-            signInPressStatus
+            this.state.signInPressStatus
                 ? this.setState({ gender: 'Male' })
                 : this.setState({ gender: 'Female' })
         }
-        // console.warn(this.state.gender)
-        // console.warn(this.state.signInPressStatusafter)
+        console.warn(this.state.gender)
+        // console.warn(this.state.signInPressStatus)
         if (
             this.validate({
                 firstName: { required: true },
