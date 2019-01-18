@@ -2,16 +2,22 @@ import React from 'react'
 import { View, TextInput, Image, StyleSheet, TouchableOpacity } from 'react-native'
 
 
-export default InputField = ({ fImageSource, placeholder, lImageSource, multiLine, inputChange, inputValue, }) => {
+export default InputField = ({
+    fImageSource,
+    placeholder,
+    lImageSource,
+    multiLine,
+    inputChange,
+    inputValue,
+    secureTextEntry, }) => {
     const {
         Input,
         ic_Image,
         ic_PasswordImage,
         inputcss
     } = styles
-    _clearInput=()=>{
+    _clearInput = () => {
         console.warn('-------');
-        
     }
     return (
         <View style={Input}>
@@ -23,6 +29,7 @@ export default InputField = ({ fImageSource, placeholder, lImageSource, multiLin
                     value={inputValue}
                     placeholder={placeholder}
                     multiline={multiLine}
+                    secureTextEntry={secureTextEntry}
                 />
                 <TouchableOpacity onPress={this._clearInput}>
                     <Image style={ic_PasswordImage} source={lImageSource} />

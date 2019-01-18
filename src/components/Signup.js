@@ -1,26 +1,56 @@
 import React, { Component } from 'react'
-import { View, TextInput, TouchableOpacity, Image, StyleSheet, Text, AsyncStorage , ScrollView } from 'react-native'
+import { View, TextInput, TouchableOpacity, Image, StyleSheet, Text, AsyncStorage, ScrollView } from 'react-native'
 import InputField from '../components/InputField'
 import SwitchSigninSignup from '../components/SwitchSigninSignup'
 import DateTimePicker from 'react-native-modal-datetime-picker'
 import { Actions } from 'react-native-router-flux'
 import { KEY_USER_MAIL, KEY_USER_PASSWORD, } from '../helper/constant'
 import moment from 'moment';
-import 'moment-timezone';
+import ValidationComponent from 'react-native-form-validator'
 
-export default class Signup extends Component {
+
+export default class Signup extends ValidationComponent {
     constructor(props) {
         super(props);
         this.state = {
             email: '',
             password: '',
+            firstName: '',
+            lastName: '',
+            address: '',
+            gender: '',
             signInPressStatus: false,
             isDateTimePickerVisible: false,
-            birthDate: 'here',
+            birthDate: 'Birthdate',
+            
+        }
+    }
+
+    _validateData = () => {
+        let {signInPressStatus} =this.state
+        {
+            signInPressStatus
+                ? this.setState({ gender: 'Male' })
+                : this.setState({ gender: 'Female' })
+        }
+        // console.warn(this.state.gender)
+        // console.warn(this.state.signInPressStatusafter)
+        if (
+            this.validate({
+                firstName: { required: true },
+                lastName: { required: true },
+                address: { required: true },
+                gender: { required: true },
+                email: { email: true, required: true },
+                password: { minlength: 3, maxlength: 10, required: true }
+            })
+        ) {
+            console.warn('--------------------', this.validate)
+            this._signInAsync();
         }
     }
     _signInAsync = async () => {
-        const { email, password} = this.state
+        const { email, password } = this.state
         console.warn(this.state.email)
         console.warn(this.state.password)
         await AsyncStorage.setItem(KEY_USER_MAIL, email);
@@ -33,7 +63,7 @@ export default class Signup extends Component {
 
     _handleDatePicked = (date) => {
         let mDate = moment(date).format('L');
-        this.setState({ birthDate : mDate })
+        this.setState({ birthDate: mDate })
         this._hideDateTimePicker();
     };
     render() {
@@ -50,29 +80,35 @@ export default class Signup extends Component {
             DateSelect
         } = styles
 
-        console.log("-------------------",birthDate)
+        console.log("-------------------", birthDate)
         return (
-                <ScrollView>
+            <ScrollView>
                 <View style={MainView}>
                     <InputField
                         fImageSource={require('../assets/image/ic_user.png')}
                         placeholder='First Name'
                         lImageSource={require('../assets/image/ic_cancel.png')}
+                        inputChange={(firstName) => this.setState({ firstName })}
+                        inputValue={this.state.firstName}
                     />
                     <InputField
                         fImageSource={require('../assets/image/ic_user.png')}
                         placeholder='Last Name'
                         lImageSource={require('../assets/image/ic_cancel.png')}
+                        inputChange={(lastName) => this.setState({ lastName })}
+                        inputValue={this.state.lastName}
                     />
                     <InputField
                         fImageSource={require('../assets/image/ic_home.png')}
                         placeholder='Address'
                         multiLine={true}
+                        inputChange={(address) => this.setState({ address })}
+                        inputValue={this.state.address}
                     />
                     <View style={SwitchMaleFemale}>
                         <Text style={{ fontSize: 20, color: '#000' }}>Gender: </Text>
                         <SwitchSigninSignup
-                            onChange={({ signInPressStatus }) => this.setState({ signInPressStatus })}
+                            onChange={( signInPressStatus ) => this.setState({ signInPressStatus })}
                             signInPressStatus={this.state.signInPressStatus}
                             LeftText='Male'
                             RightText='Female'
@@ -80,32 +116,34 @@ export default class Signup extends Component {
                     </View>
                     <View style={EmailInput}>
                         <TextInput
-                            style={{ width:'90%' }}
+                            style={{ width: '90%' }}
                             placeholder='Email Address'
-                            onChangeText={( email ) => this.setState({ email })}
+                            onChangeText={(email) => this.setState({ email })}
                             value={this.state.email}
                         />
                         <Image
                             style={ImageView}
                             source={require('../assets/image/ic_info.png')}
-                            
+
                         />
                     </View>
                     <View style={PasswordInput}>
                         <Text>Password:</Text>
                         <TextInput
-                            style={{ width:'80%' }}
+                            style={{ width: '80%' }}
                             placeholder='***'
-                            onChangeText={( password ) => this.setState({ password })}
+                            onChangeText={(password) => this.setState({ password })}
                             value={this.state.password}
+                            secureTextEntry={true}
                         />
                     </View>
-                    <View style={DateSelect}> 
+                    <View style={DateSelect}>
                         <TouchableOpacity
-                        style={{flexDirection:'column',alignItems:'center'}}
-                         onPress={this._showDateTimePicker}>
-                            <Text style={{color:'#000'}}>Select Birthdate</Text>
-                            <Text style={{color:'#000',fontSize:20}}>{birthDate}</Text> 
+                            style={{ flexDirection: 'column', alignItems: 'center' }}
+                            onPress={this._showDateTimePicker}>
+                            <Text style={{ color: '#000' }}>Select Birthdate</Text>
+                            <Text style={{ color: '#000', fontSize: 20 }}>{birthDate}</Text>
+
                         </TouchableOpacity>
                         <DateTimePicker
                             isVisible={this.state.isDateTimePickerVisible}
@@ -121,14 +159,20 @@ export default class Signup extends Component {
                         </TouchableOpacity>
                         <TouchableOpacity
                             style={ButtonView}
-                            onPress={this._signInAsync}
+                            onPress={this._validateData}
                         >
                             <Text style={ButtonText}>Save</Text>
+
                         </TouchableOpacity>
                     </View>
+                    <View style={{ flex: 1, backgroundColor: 'red' }}>
+                        <Text style={{ fontSize: 30, color: '#000', }}>
+                            {this.getErrorMessages()}
+                        </Text>
+                    </View>
                 </View>
-                </ScrollView>
-            
+            </ScrollView>
+
         );
     }
 }
@@ -196,14 +240,14 @@ const styles = StyleSheet.create({
         width: 30
     },
     DateSelect: {
-        width:'90%',
+        width: '90%',
         padding: 10,
         margin: 10,
         // backgroundColor: 'red',
         flexDirection: 'column',
         alignItems: 'center',
-        justifyContent : 'center',
-        borderRadius : 40,
+        justifyContent: 'center',
+        borderRadius: 40,
         borderWidth: 1,
     }
 });

@@ -10,12 +10,12 @@ const App = () => {
                     <Scene key='mainscreen'
                            component={MainScreen}
                            hideNavBar
-                        //    initial
+                           initial
                     />
                     <Scene key='thankyou'
                            component={ThankYou}
                            hideNavBar
-                           initial
+                        //    initial
                     />
                 </Stack>
             </Router>

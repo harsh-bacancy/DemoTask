@@ -32,7 +32,7 @@ export default class Signin extends Component {
             Actions.thankyou();
         }
         else {
-            console.warn(this.state.getemail, this.state.getpassword);
+            console.warn('email:',this.state.getemail,' password:', this.state.getpassword);
             Actions.mainscreen();
         }
     };
@@ -64,6 +64,7 @@ export default class Signin extends Component {
                     lImageSource={require('../assets/image/ic_invisible.png')}
                     inputChange={(password) => this.setState({ password })}
                     inputValue={this.state.password}
+                    secureTextEntry={true}
                 />
                 <View style={ToggleSwitchView}>
                     <ToggleSwitch

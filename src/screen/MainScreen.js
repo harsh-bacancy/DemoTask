@@ -13,7 +13,6 @@ export default class MainScreen extends Component {
             signInPressStatus: true
         }
     }
-
     render() {
         const { MainScreen, Header, BottomScreen, BackImage, } = styles
         return (

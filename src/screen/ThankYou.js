@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native'
 import { Actions } from 'react-native-router-flux';
 
+
 export default class ThankYou extends Component {
     constructor(props) {
         super();
@@ -30,7 +31,7 @@ export default class ThankYou extends Component {
                     />
                     <TouchableOpacity
                         style={button}
-                        onPress={()=>Actions.mainscreen()}
+                        onPress={()=>Actions.popTo('mainscreen')}
                     >
                         <Text style={{ color: '#FFF', }}>Log Out</Text>
                     </TouchableOpacity>
