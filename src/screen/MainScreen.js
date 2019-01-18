@@ -17,7 +17,7 @@ export default class MainScreen extends Component {
     render() {
         const { MainScreen, Header, BottomScreen, BackImage, } = styles
         return (
-            <ScrollView>
+            
                 <View style={MainScreen}>
                     <View style={Header}>
                         <Image
@@ -41,14 +41,15 @@ export default class MainScreen extends Component {
                         }
                     </View>
                 </View>
-            </ScrollView>
+            
         );
     }
 }
 const styles = StyleSheet.create({
     MainScreen: {
-        flex: 1,
+        flex:1,
         backgroundColor: '#FFF',
+        position: 'relative'
     },
     Header: {
         flex: .5,
@@ -59,11 +60,14 @@ const styles = StyleSheet.create({
         
     },
     BottomScreen: {
-        flex: 5
+        flex: 5,
+        justifyContent: 'center',
     },
     BackImage: {
         height: 30,
         width: 30,
-        margin: 10
+        margin: 10,
+        
+        
     }
 });

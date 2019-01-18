@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, TextInput, Image, StyleSheet, } from 'react-native'
+import { View, TextInput, Image, StyleSheet, TouchableOpacity } from 'react-native'
 
 
 export default InputField = ({ fImageSource, placeholder, lImageSource, multiLine, inputChange, inputValue, }) => {
@@ -9,6 +9,10 @@ export default InputField = ({ fImageSource, placeholder, lImageSource, multiLin
         ic_PasswordImage,
         inputcss
     } = styles
+    _clearInput=()=>{
+        console.warn('-------');
+        
+    }
     return (
         <View style={Input}>
             <Image style={ic_Image} source={fImageSource} />
@@ -20,7 +24,9 @@ export default InputField = ({ fImageSource, placeholder, lImageSource, multiLin
                     placeholder={placeholder}
                     multiline={multiLine}
                 />
-                <Image style={ic_PasswordImage} source={lImageSource} />
+                <TouchableOpacity onPress={this._clearInput}>
+                    <Image style={ic_PasswordImage} source={lImageSource} />
+                </TouchableOpacity>
             </View>
         </View>
     )

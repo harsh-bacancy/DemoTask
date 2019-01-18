@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
-import { View, TextInput, TouchableOpacity, Image, StyleSheet, Text, AsyncStorage } from 'react-native'
+import { View, TextInput, TouchableOpacity, Image, StyleSheet, Text, AsyncStorage , ScrollView } from 'react-native'
 import InputField from '../components/InputField'
 import SwitchSigninSignup from '../components/SwitchSigninSignup'
 import DateTimePicker from 'react-native-modal-datetime-picker'
 import { Actions } from 'react-native-router-flux'
 import { KEY_USER_MAIL, KEY_USER_PASSWORD, } from '../helper/constant'
+import moment from 'moment';
+import 'moment-timezone';
 
 export default class Signup extends Component {
     constructor(props) {
@@ -14,7 +16,7 @@ export default class Signup extends Component {
             password: '',
             signInPressStatus: false,
             isDateTimePickerVisible: false,
-            birthDate: [],
+            birthDate: 'here',
         }
     }
     _signInAsync = async () => {
@@ -30,13 +32,9 @@ export default class Signup extends Component {
     _hideDateTimePicker = () => this.setState({ isDateTimePickerVisible: false });
 
     _handleDatePicked = (date) => {
-        alert(date);
-        // this.setState({birthDate : date});
+        let mDate = moment(date).format('L');
+        this.setState({ birthDate : mDate })
         this._hideDateTimePicker();
-        this.setState((state) => {
-            birthDate: (date)
-        });
-
     };
     render() {
         const { birthDate } = this.state
@@ -51,8 +49,10 @@ export default class Signup extends Component {
             ImageView,
             DateSelect
         } = styles
+
+        console.log("-------------------",birthDate)
         return (
-            
+                <ScrollView>
                 <View style={MainView}>
                     <InputField
                         fImageSource={require('../assets/image/ic_user.png')}
@@ -101,10 +101,12 @@ export default class Signup extends Component {
                         />
                     </View>
                     <View style={DateSelect}> 
-                        <TouchableOpacity onPress={this._showDateTimePicker}>
+                        <TouchableOpacity
+                        style={{flexDirection:'column',alignItems:'center'}}
+                         onPress={this._showDateTimePicker}>
                             <Text style={{color:'#000'}}>Select Birthdate</Text>
+                            <Text style={{color:'#000',fontSize:20}}>{birthDate}</Text> 
                         </TouchableOpacity>
-                        <Text>Date: {birthDate}</Text>
                         <DateTimePicker
                             isVisible={this.state.isDateTimePickerVisible}
                             onConfirm={this._handleDatePicked}
@@ -125,6 +127,7 @@ export default class Signup extends Component {
                         </TouchableOpacity>
                     </View>
                 </View>
+                </ScrollView>
             
         );
     }
@@ -197,9 +200,9 @@ const styles = StyleSheet.create({
         padding: 10,
         margin: 10,
         // backgroundColor: 'red',
-        flexDirection: 'row',
+        flexDirection: 'column',
         alignItems: 'center',
-        justifyContent : 'space-evenly',
+        justifyContent : 'center',
         borderRadius : 40,
         borderWidth: 1,
     }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, TextInput, Image, Text, StyleSheet, TouchableOpacity, ScrollView, AsyncStorage } from 'react-native'
+import { View, TextInput, Image, Text, StyleSheet, TouchableOpacity, AsyncStorage } from 'react-native'
 import ToggleSwitch from 'toggle-switch-react-native'
 import InputField from '../components/InputField'
 import { Actions } from 'react-native-router-flux'
@@ -17,8 +17,8 @@ export default class Signin extends Component {
         }
     }
     _isChangeState = () => {
-        const { isOnState }=this.state
-        this.setState({isOnState :!isOnState});
+        const { isOnState } = this.state
+        this.setState({ isOnState: !isOnState });
         // isOn={isOnState}
         console.warn(isOnState)
     }
@@ -27,7 +27,7 @@ export default class Signin extends Component {
         this.setState({ getemail: await AsyncStorage.getItem(KEY_USER_MAIL) });
         this.setState({ getpassword: await AsyncStorage.getItem(KEY_USER_PASSWORD) });
     }
-    _ValidateLogin = () => {
+    _validateLogin = () => {
         if (this.state.getemail == this.state.email && this.state.getpassword == this.state.password) {
             Actions.thankyou();
         }
@@ -36,6 +36,7 @@ export default class Signin extends Component {
             Actions.mainscreen();
         }
     };
+  
     render() {
         const { MainView,
             EmailInput,
@@ -49,57 +50,48 @@ export default class Signin extends Component {
             ButtonText
         } = styles
         return (
-            
-                <View style={MainView}>
-                    <InputField
-                        fImageSource={require('../assets/image/ic_user.png')}
-                        placeholder='Enter User Name or Email'
-                        lImageSource={require('../assets/image/ic_cancel.png')}
-                        inputChange={(email) => this.setState({ email })}
-                        inputValue={this.state.email}
+            <View style={MainView}>
+                <InputField
+                    fImageSource={require('../assets/image/ic_user.png')}
+                    placeholder='Enter User Name or Email'
+                    lImageSource={require('../assets/image/ic_cancel.png')}
+                    inputChange={(email) => this.setState({ email })}
+                    inputValue={this.state.email}
+                />
+                <InputField
+                    fImageSource={require('../assets/image/ic_password.png')}
+                    placeholder='Password'
+                    lImageSource={require('../assets/image/ic_invisible.png')}
+                    inputChange={(password) => this.setState({ password })}
+                    inputValue={this.state.password}
+                />
+                <View style={ToggleSwitchView}>
+                    <ToggleSwitch
+                        isOn={this.state.isOnState}
+                        onColor='#00DE62'
+                        offColor='gray'
+                        label='Save Password'
+                        labelStyle={{ color: 'black', fontWeight: '900' }}
+                        size='medium'
+                        onToggle={this._isChangeState}
                     />
-                    <InputField
-                        fImageSource={require('../assets/image/ic_password.png')}
-                        placeholder='Password'
-                        lImageSource={require('../assets/image/ic_invisible.png')}
-                        inputChange={(password) => this.setState({ password })}
-                        inputValue={this.state.password}
-                    />
-                    {/* <View style={PasswordInput}>
-                        <Image style={ic_Image} source={require('../assets/image/ic_password.png')} />
-                        <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-                            <TextInput
-                                placeholder='Password'
-                            />
-                            <Image style={ic_PasswordImage} source={require('../assets/image/ic_invisible.png')} />
-                        </View>
-                    </View> */}
-                    <View style={ToggleSwitchView}>
-                        <ToggleSwitch
-                            isOn={this.state.isOnState}
-                            onColor='#00DE62'
-                            offColor='gray'
-                            label='Save Password'
-                            labelStyle={{ color: 'black', fontWeight: '900' }}
-                            size='medium'
-                            onToggle={this._isChangeState}
-                        />
-                    </View>
-                    <View style={ButtonArea}>
-                        <TouchableOpacity
-                            style={ButtonView}
-                        >
-                            <Text style={ButtonText}>Cancel</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity
-                            style={ButtonView}
-                            onPress={this._ValidateLogin}
-                        >
-                            <Text style={ButtonText}>Log In</Text>
-                        </TouchableOpacity>
-                    </View>
                 </View>
-            
+                <View style={ButtonArea}>
+                    <TouchableOpacity
+                        style={ButtonView}
+                    >
+                        <Text style={ButtonText}>Cancel</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        style={ButtonView}
+                        onPress={this._validateLogin}
+                    >
+                        <Text style={ButtonText}>Log In</Text>
+                    </TouchableOpacity>
+                </View>
+            </View>
+
+
         );
     }
 }
