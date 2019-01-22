@@ -9,7 +9,8 @@ export default InputField = ({
     multiLine,
     inputChange,
     inputValue,
-    secureTextEntry, }) => {
+    secureTextEntry,
+    onPressC, }) => {
     const {
         Input,
         ic_Image,
@@ -31,7 +32,7 @@ export default InputField = ({
                     multiline={multiLine}
                     secureTextEntry={secureTextEntry}
                 />
-                <TouchableOpacity onPress={this._clearInput}>
+                <TouchableOpacity onPress={onPressC}>
                     <Image style={ic_PasswordImage} source={lImageSource} />
                 </TouchableOpacity>
             </View>

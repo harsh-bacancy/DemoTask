@@ -90,6 +90,7 @@ export default class Signup extends ValidationComponent {
                         lImageSource={require('../assets/image/ic_cancel.png')}
                         inputChange={(firstName) => this.setState({ firstName })}
                         inputValue={this.state.firstName}
+                        onPressC={(firstName) => this.setState({ firstName })}
                     />
                     <InputField
                         fImageSource={require('../assets/image/ic_user.png')}
@@ -97,6 +98,7 @@ export default class Signup extends ValidationComponent {
                         lImageSource={require('../assets/image/ic_cancel.png')}
                         inputChange={(lastName) => this.setState({ lastName })}
                         inputValue={this.state.lastName}
+                        onPressC={(lastName) => this.setState({ lastName })}
                     />
                     <InputField
                         fImageSource={require('../assets/image/ic_home.png')}
@@ -104,6 +106,7 @@ export default class Signup extends ValidationComponent {
                         multiLine={true}
                         inputChange={(address) => this.setState({ address })}
                         inputValue={this.state.address}
+                        onPressC={(address) => this.setState({ address })}
                     />
                     <View style={SwitchMaleFemale}>
                         <Text style={{ fontSize: 20, color: '#000' }}>Gender: </Text>
@@ -120,11 +123,11 @@ export default class Signup extends ValidationComponent {
                             placeholder='Email Address'
                             onChangeText={(email) => this.setState({ email })}
                             value={this.state.email}
+                            
                         />
                         <Image
                             style={ImageView}
                             source={require('../assets/image/ic_info.png')}
-
                         />
                     </View>
                     <View style={PasswordInput}>
