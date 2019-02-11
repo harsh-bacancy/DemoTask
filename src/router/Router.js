@@ -1,24 +1,29 @@
-import React, {Component} from 'react';
+import React from 'react';
 import { Router, Scene, Stack, } from 'react-native-router-flux';
+import { connect, Provider } from 'react-redux'
 import MainScreen from '../screen/MainScreen'
 import ThankYou from '../screen/ThankYou'
+import store from '../redux/store'
+
+const ConnectRouter = connect()(Router)
 
 const App = () => {
-        return(
-            <Router>
+    return (
+        <Provider store={store}>
+            <ConnectRouter>
                 <Stack>
                     <Scene key='mainscreen'
-                           component={MainScreen}
-                           hideNavBar
-                           initial
+                        component={MainScreen}
+                        hideNavBar
+                        initial
                     />
                     <Scene key='thankyou'
-                           component={ThankYou}
-                           hideNavBar
-                        //    initial
+                        component={ThankYou}
+                        hideNavBar
                     />
                 </Stack>
-            </Router>
-        );
+            </ConnectRouter>
+        </Provider>
+    );
 }
 export default App;

@@ -1,6 +1,12 @@
 import React from 'react'
-import { View, TextInput, Image, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, TextInput, Image, StyleSheet, TouchableOpacity, Text } from 'react-native'
 
+export const validate = values => {
+    const errors = {};
+    if(!values.firstname){
+        errors.firstname = 'Enter First name'
+    }
+}
 
 export default InputField = ({
     fImageSource,
@@ -10,7 +16,9 @@ export default InputField = ({
     inputChange,
     inputValue,
     secureTextEntry,
-    onPressC, }) => {
+    onPressC,
+    // meta: { error, touched },
+}) => {
     const {
         Input,
         ic_Image,
@@ -36,6 +44,7 @@ export default InputField = ({
                     <Image style={ic_PasswordImage} source={lImageSource} />
                 </TouchableOpacity>
             </View>
+            {/* <Text>{touched && error}</Text> */}
         </View>
     )
 }

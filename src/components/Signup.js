@@ -1,15 +1,17 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { View, TextInput, TouchableOpacity, Image, StyleSheet, Text, AsyncStorage, ScrollView } from 'react-native'
-import InputField from '../components/InputField'
-import SwitchSigninSignup from '../components/SwitchSigninSignup'
 import DateTimePicker from 'react-native-modal-datetime-picker'
-import { Actions } from 'react-native-router-flux'
-import { KEY_USER_MAIL, KEY_USER_PASSWORD, } from '../helper/constant'
-import moment from 'moment';
 import ValidationComponent from 'react-native-form-validator'
+import moment from 'moment';
+import { reduxForm, Field } from 'redux-form'
+import { Actions } from 'react-native-router-flux'
+import {InputField, validate} from '../components/InputField'
+import SwitchSigninSignup from '../components/SwitchSigninSignup'
+import { KEY_USER_MAIL, KEY_USER_PASSWORD, } from '../helper/constant'
 
 
-export default class Signup extends ValidationComponent {
+
+class Signup extends ValidationComponent {
     constructor(props) {
         super(props);
         this.state = {
@@ -22,7 +24,7 @@ export default class Signup extends ValidationComponent {
             signInPressStatus: false,
             isDateTimePickerVisible: false,
             birthDate: 'Birthdate',
-            
+
         }
     }
 
@@ -82,9 +84,11 @@ export default class Signup extends ValidationComponent {
 
         console.log("-------------------", birthDate)
         return (
-            <ScrollView>
+            <ScrollView style={{ flex: 1 }}>
                 <View style={MainView}>
-                    <InputField
+                    <Field
+                        component={InputField}
+                        name='firstname'
                         fImageSource={require('../assets/image/ic_user.png')}
                         placeholder='First Name'
                         lImageSource={require('../assets/image/ic_cancel.png')}
@@ -92,7 +96,9 @@ export default class Signup extends ValidationComponent {
                         inputValue={this.state.firstName}
                         onPressC={(firstName) => this.setState({ firstName })}
                     />
-                    <InputField
+                    <Field
+                        component={InputField}
+                        name='lastname'
                         fImageSource={require('../assets/image/ic_user.png')}
                         placeholder='Last Name'
                         lImageSource={require('../assets/image/ic_cancel.png')}
@@ -100,7 +106,9 @@ export default class Signup extends ValidationComponent {
                         inputValue={this.state.lastName}
                         onPressC={(lastName) => this.setState({ lastName })}
                     />
-                    <InputField
+                    <Field
+                        component={InputField}
+                        name='address'
                         fImageSource={require('../assets/image/ic_home.png')}
                         placeholder='Address'
                         multiLine={true}
@@ -111,7 +119,7 @@ export default class Signup extends ValidationComponent {
                     <View style={SwitchMaleFemale}>
                         <Text style={{ fontSize: 20, color: '#000' }}>Gender: </Text>
                         <SwitchSigninSignup
-                            onChange={( signInPressStatus ) => this.setState({ signInPressStatus })}
+                            onChange={(signInPressStatus) => this.setState({ signInPressStatus })}
                             signInPressStatus={this.state.signInPressStatus}
                             LeftText='Male'
                             RightText='Female'
@@ -123,7 +131,7 @@ export default class Signup extends ValidationComponent {
                             placeholder='Email Address'
                             onChangeText={(email) => this.setState({ email })}
                             value={this.state.email}
-                            
+
                         />
                         <Image
                             style={ImageView}
@@ -254,3 +262,8 @@ const styles = StyleSheet.create({
         borderWidth: 1,
     }
 });
+
+export default reduxForm({
+    form: 'singupform',
+    validate
+})(Signup);
