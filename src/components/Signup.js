@@ -5,7 +5,7 @@ import ValidationComponent from 'react-native-form-validator'
 import moment from 'moment';
 import { reduxForm, Field } from 'redux-form'
 import { Actions } from 'react-native-router-flux'
-import {InputField, validate} from '../components/InputField'
+import InputField from '../components/InputField'
 import SwitchSigninSignup from '../components/SwitchSigninSignup'
 import { KEY_USER_MAIL, KEY_USER_PASSWORD, } from '../helper/constant'
 
@@ -95,6 +95,7 @@ class Signup extends ValidationComponent {
                         inputChange={(firstName) => this.setState({ firstName })}
                         inputValue={this.state.firstName}
                         onPressC={(firstName) => this.setState({ firstName })}
+                        error={this.getErrorsInField('firstName')}
                     />
                     <Field
                         component={InputField}
@@ -105,6 +106,7 @@ class Signup extends ValidationComponent {
                         inputChange={(lastName) => this.setState({ lastName })}
                         inputValue={this.state.lastName}
                         onPressC={(lastName) => this.setState({ lastName })}
+                        error={this.getErrorsInField('lastName')}
                     />
                     <Field
                         component={InputField}
@@ -115,6 +117,7 @@ class Signup extends ValidationComponent {
                         inputChange={(address) => this.setState({ address })}
                         inputValue={this.state.address}
                         onPressC={(address) => this.setState({ address })}
+                        error={this.getErrorsInField('address')}
                     />
                     <View style={SwitchMaleFemale}>
                         <Text style={{ fontSize: 20, color: '#000' }}>Gender: </Text>
@@ -124,6 +127,9 @@ class Signup extends ValidationComponent {
                             LeftText='Male'
                             RightText='Female'
                         />
+                    </View>
+                    <View style={{ width: '90%', justifyContent: 'center', alignItems: 'center', marginBottom: 5, }}>
+                        <Text style={{ color: 'red' }}>{this.getErrorsInField('gender')}</Text>
                     </View>
                     <View style={EmailInput}>
                         <TextInput
@@ -138,6 +144,9 @@ class Signup extends ValidationComponent {
                             source={require('../assets/image/ic_info.png')}
                         />
                     </View>
+                    <View style={{ width: '90%', justifyContent: 'center', alignItems: 'center', marginBottom: 5, }}>
+                        <Text style={{ color: 'red' }}>{this.getErrorsInField('email')}</Text>
+                    </View>
                     <View style={PasswordInput}>
                         <Text>Password:</Text>
                         <TextInput
@@ -147,6 +156,9 @@ class Signup extends ValidationComponent {
                             value={this.state.password}
                             secureTextEntry={true}
                         />
+                    </View>
+                    <View style={{ width: '90%', justifyContent: 'center', alignItems: 'center', marginBottom: 5, }}>
+                        <Text style={{ color: 'red' }}>{this.getErrorsInField('password')}</Text>
                     </View>
                     <View style={DateSelect}>
                         <TouchableOpacity
@@ -176,11 +188,11 @@ class Signup extends ValidationComponent {
 
                         </TouchableOpacity>
                     </View>
-                    <View style={{ flex: 1, backgroundColor: 'red' }}>
+                    {/* <View style={{ flex: 1, backgroundColor: 'red' }}>
                         <Text style={{ fontSize: 30, color: '#000', }}>
                             {this.getErrorMessages()}
                         </Text>
-                    </View>
+                    </View> */}
                 </View>
             </ScrollView>
 
@@ -264,6 +276,5 @@ const styles = StyleSheet.create({
 });
 
 export default reduxForm({
-    form: 'singupform',
-    validate
+    singupform: 'singupform',
 })(Signup);

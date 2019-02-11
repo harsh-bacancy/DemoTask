@@ -1,13 +1,6 @@
 import React from 'react'
 import { View, TextInput, Image, StyleSheet, TouchableOpacity, Text } from 'react-native'
 
-export const validate = values => {
-    const errors = {};
-    if(!values.firstname){
-        errors.firstname = 'Enter First name'
-    }
-}
-
 export default InputField = ({
     fImageSource,
     placeholder,
@@ -17,7 +10,7 @@ export default InputField = ({
     inputValue,
     secureTextEntry,
     onPressC,
-    // meta: { error, touched },
+    error,
 }) => {
     const {
         Input,
@@ -28,23 +21,28 @@ export default InputField = ({
     _clearInput = () => {
         console.warn('-------');
     }
+    console.log('error-', error);
     return (
-        <View style={Input}>
-            <Image style={ic_Image} source={fImageSource} />
-            <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
-                <TextInput
-                    style={inputcss}
-                    onChangeText={inputChange}
-                    value={inputValue}
-                    placeholder={placeholder}
-                    multiline={multiLine}
-                    secureTextEntry={secureTextEntry}
-                />
-                <TouchableOpacity onPress={onPressC}>
-                    <Image style={ic_PasswordImage} source={lImageSource} />
-                </TouchableOpacity>
+        <View>
+            <View style={Input}>
+                <Image style={ic_Image} source={fImageSource} />
+                <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
+                    <TextInput
+                        style={inputcss}
+                        onChangeText={inputChange}
+                        value={inputValue}
+                        placeholder={placeholder}
+                        multiline={multiLine}
+                        secureTextEntry={secureTextEntry}
+                    />
+                    <TouchableOpacity onPress={onPressC}>
+                        <Image style={ic_PasswordImage} source={lImageSource} />
+                    </TouchableOpacity>
+                </View>
             </View>
-            {/* <Text>{touched && error}</Text> */}
+            <View style={{ width: '90%', justifyContent: 'center', alignItems: 'center', marginBottom: 5, }}>
+                <Text style={{ color: 'red' }}>{error}</Text>
+            </View>
         </View>
     )
 }

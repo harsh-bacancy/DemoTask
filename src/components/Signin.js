@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { View, TextInput, Image, Text, StyleSheet, TouchableOpacity, AsyncStorage, ScrollView } from 'react-native'
 import ToggleSwitch from 'toggle-switch-react-native'
+import { reduxForm, Field } from 'redux-form'
 import InputField from '../components/InputField'
 import { Actions } from 'react-native-router-flux'
 import { KEY_USER_MAIL, KEY_USER_PASSWORD, } from '../helper/constant'
