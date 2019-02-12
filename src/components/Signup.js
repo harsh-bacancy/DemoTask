@@ -122,6 +122,7 @@ export default class Signup extends ValidationComponent {
                         onPressC={(address) => this.setState({ address })}
                         error={this.getErrorsInField('address')}
                     />
+                    
                     <View style={SwitchMaleFemale}>
                         <Text style={this.state.signInPressStatus?{ fontSize: 20, color: 'blue' }:{fontSize: 20, color: '#ff16b5'}}>Gender: </Text>
                         <SwitchSigninSignup
@@ -222,6 +223,7 @@ const styles = StyleSheet.create({
     },
     EmailInput: {
         width: '90%',
+        height: 50,
         // backgroundColor:'red',
         borderTopColor: 'gray',
         borderTopWidth: 1,
@@ -234,6 +236,7 @@ const styles = StyleSheet.create({
     },
     PasswordInput: {
         width: '90%',
+        height: 50,
         // backgroundColor:'red',
         borderTopColor: 'gray',
         borderTopWidth: 1,
