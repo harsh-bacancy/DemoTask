@@ -5,12 +5,12 @@ import MainScreen from '../screen/MainScreen'
 import ThankYou from '../screen/ThankYou'
 import store from '../redux/store'
 
-// const ConnectRouter = connect()(Router)
+const ConnectRouter = connect()(Router)
 
 const App = () => {
     return (
-        // <Provider store={store}>
-            <Router>
+        <Provider store={store}>
+            <ConnectRouter>
                 <Stack>
                     <Scene key='mainscreen'
                         component={MainScreen}
@@ -22,8 +22,8 @@ const App = () => {
                         hideNavBar
                     />
                 </Stack>
-            </Router>
-        // </Provider>
+            </ConnectRouter>
+         </Provider>
     );
 }
 export default App;

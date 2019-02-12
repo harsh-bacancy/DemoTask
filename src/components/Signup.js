@@ -3,12 +3,11 @@ import { View, TextInput, TouchableOpacity, Image, StyleSheet, Text, AsyncStorag
 import DateTimePicker from 'react-native-modal-datetime-picker'
 import ValidationComponent from 'react-native-form-validator'
 import moment from 'moment';
-// import { reduxForm, Field } from 'redux-form'
+import { Field } from 'redux-form'
 import { Actions } from 'react-native-router-flux'
 import InputField from '../components/InputField'
 import SwitchSigninSignup from '../components/SwitchSigninSignup'
 import { KEY_USER_MAIL, KEY_USER_PASSWORD, } from '../helper/constant'
-
 
 
 export default class Signup extends ValidationComponent {
@@ -88,9 +87,9 @@ export default class Signup extends ValidationComponent {
         return (
             <ScrollView style={{ flex: 1 }}>
                 <View style={MainView}>
-                    <InputField
-                        // component={InputField}
-                        // name='firstname'
+                    <Field
+                        component={InputField}
+                        name='firstname'
                         fImageSource={require('../assets/image/ic_user.png')}
                         placeholder='First Name'
                         lImageSource={require('../assets/image/ic_cancel.png')}
@@ -99,9 +98,9 @@ export default class Signup extends ValidationComponent {
                         onPressC={(firstName) => this.setState({ firstName })}
                         error={this.getErrorsInField('firstName')}
                     />
-                    <InputField
-                        // component={InputField}
-                        // name='lastname'
+                    <Field
+                        component={InputField}
+                        name='lastname'
                         fImageSource={require('../assets/image/ic_user.png')}
                         placeholder='Last Name'
                         lImageSource={require('../assets/image/ic_cancel.png')}
@@ -110,9 +109,9 @@ export default class Signup extends ValidationComponent {
                         onPressC={(lastName) => this.setState({ lastName })}
                         error={this.getErrorsInField('lastName')}
                     />
-                    <InputField
-                        // component={InputField}
-                        // name='address'
+                    <Field
+                        component={InputField}
+                        name='address'
                         fImageSource={require('../assets/image/ic_home.png')}
                         lImageSource={require('../assets/image/ic_cancel.png')}
                         placeholder='Address'
@@ -192,11 +191,6 @@ export default class Signup extends ValidationComponent {
 
                         </TouchableOpacity>
                     </View>
-                    {/* <View style={{ flex: 1, backgroundColor: 'red' }}>
-                        <Text style={{ fontSize: 30, color: '#000', }}>
-                            {this.getErrorMessages()}
-                        </Text>
-                    </View> */}
                 </View>
             </ScrollView>
 

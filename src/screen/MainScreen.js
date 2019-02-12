@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
-import { View, StyleSheet, Text, Image, ScrollView } from 'react-native'
+import { View, StyleSheet, } from 'react-native'
+import { reduxForm } from 'redux-form'
 import SwitchSigninSignup from '../components/SwitchSigninSignup'
 import Signin from '../components/Signin'
 import Signup from '../components/Signup'
 
 
-export default class MainScreen extends Component {
+class MainScreen extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -59,3 +60,5 @@ const styles = StyleSheet.create({
         margin: 10,
     }
 });
+
+export default reduxForm()(MainScreen);
