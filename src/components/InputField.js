@@ -21,7 +21,7 @@ export default InputField = ({
     _clearInput = () => {
         console.warn('-------');
     }
-    console.log('error-', error);
+    console.log('error---', error);
     return (
         <View>
             <View style={Input}>

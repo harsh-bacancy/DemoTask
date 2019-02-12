@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { View, TextInput, Image, Text, StyleSheet, TouchableOpacity, AsyncStorage, ScrollView } from 'react-native'
 import ToggleSwitch from 'toggle-switch-react-native'
-import { reduxForm, Field } from 'redux-form'
 import InputField from '../components/InputField'
 import { Actions } from 'react-native-router-flux'
 import { KEY_USER_MAIL, KEY_USER_PASSWORD, } from '../helper/constant'
@@ -14,14 +13,13 @@ export default class Signin extends Component {
             password: '',
             getemail: '',
             getpassword: '',
-            isPasswordVisible:false,
+            isPasswordVisible: false,
             isOnState: true
         }
     }
     _isChangeState = () => {
         const { isOnState } = this.state
         this.setState({ isOnState: !isOnState });
-        // isOn={isOnState}
         console.warn(isOnState)
     }
 
@@ -40,12 +38,8 @@ export default class Signin extends Component {
     };
 
     render() {
-        const { MainView,
-            EmailInput,
-            PasswordInput,
-            ic_Image,
-            ic_CancleImage,
-            ic_PasswordImage,
+        const {
+            MainView,
             ToggleSwitchView,
             ButtonView,
             ButtonArea,
@@ -65,11 +59,11 @@ export default class Signin extends Component {
                     <InputField
                         fImageSource={require('../assets/image/ic_password.png')}
                         placeholder='Password'
-                        lImageSource={this.state.isPasswordVisible ? require('../assets/image/ic_invisible.png') : require('../assets/image/ic_visible.png') }
+                        lImageSource={this.state.isPasswordVisible ? require('../assets/image/ic_invisible.png') : require('../assets/image/ic_visible.png')}
                         inputChange={(password) => this.setState({ password })}
                         inputValue={this.state.password}
                         secureTextEntry={this.state.isPasswordVisible}
-                        onPressC={(isPasswordVisible) => this.setState({ isPasswordVisible : !this.state.isPasswordVisible })}
+                        onPressC={(isPasswordVisible) => this.setState({ isPasswordVisible: !this.state.isPasswordVisible })}
                     />
                     <View style={ToggleSwitchView}>
                         <ToggleSwitch

@@ -12,16 +12,11 @@ export default class SwitchSigninSignup extends Component {
     }
     _onHideUnderlay = () => {
         let signInPressStatus = true;
-        // console.warn(signInPressStatus);
-        // let change = true;
         this.setState({ signInPressStatus });
         this.props.onChange(signInPressStatus)
     }
     _onShowUnderlay = () => {
         let signInPressStatus = false;
-        // console.warn("true");
-        // console.warn(signInPressStatus);
-        // let change = false;
         this.setState({ signInPressStatus });
         this.props.onChange(signInPressStatus)
     }
@@ -52,10 +47,8 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#FFFFFF',
+        backgroundColor: '#FFF',
         flexDirection: 'row',
-        marginVertical: 10
-
     },
     RightbuttonPress: {
         flex: 1,
