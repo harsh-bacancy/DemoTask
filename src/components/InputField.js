@@ -21,12 +21,19 @@ export default InputField = ({
     _clearInput = () => {
         console.warn('-------');
     }
-    console.log('error---', error);
+    function isEmpty(obj) {
+        for (var key in obj) {
+            if (obj.hasOwnProperty(key))
+                return false;
+        }
+        return true;
+    }
+    console.log('error---', isEmpty(error));
     return (
         <View>
             <View style={Input}>
                 <Image style={ic_Image} source={fImageSource} />
-                <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
+                <View style={!multiLine?{ flex: 1, flexDirection: 'row', justifyContent: 'space-between'}:{ flex: 1, flexDirection: 'row', justifyContent: 'space-between', height:100 }}>
                     <TextInput
                         style={inputcss}
                         onChangeText={inputChange}
@@ -40,9 +47,12 @@ export default InputField = ({
                     </TouchableOpacity>
                 </View>
             </View>
-            <View style={{ width: '90%', justifyContent: 'center', alignItems: 'center', marginBottom: 5, }}>
-                <Text style={{ color: 'red' }}>{error}</Text>
-            </View>
+            {!isEmpty(error) ?
+                <View style={{ width: '90%', justifyContent: 'center', alignItems: 'center', marginBottom: 5, }}>
+                    <Text style={{ color: 'red' }}>{error}</Text>
+                </View>
+                : null
+            }
         </View>
     )
 }

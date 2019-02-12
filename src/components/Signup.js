@@ -3,7 +3,7 @@ import { View, TextInput, TouchableOpacity, Image, StyleSheet, Text, AsyncStorag
 import DateTimePicker from 'react-native-modal-datetime-picker'
 import ValidationComponent from 'react-native-form-validator'
 import moment from 'moment';
-import { reduxForm, Field } from 'redux-form'
+// import { reduxForm, Field } from 'redux-form'
 import { Actions } from 'react-native-router-flux'
 import InputField from '../components/InputField'
 import SwitchSigninSignup from '../components/SwitchSigninSignup'
@@ -11,7 +11,7 @@ import { KEY_USER_MAIL, KEY_USER_PASSWORD, } from '../helper/constant'
 
 
 
-class Signup extends ValidationComponent {
+export default class Signup extends ValidationComponent {
     constructor(props) {
         super(props);
         this.state = {
@@ -26,6 +26,7 @@ class Signup extends ValidationComponent {
             birthDate: 'Birthdate',
 
         }
+        
     }
 
     _validateData = () => {
@@ -35,7 +36,8 @@ class Signup extends ValidationComponent {
                 ? this.setState({ gender: 'Male' })
                 : this.setState({ gender: 'Female' })
         }
-        console.warn(this.state.gender)
+        console.log(this.state.gender)
+        console.log('here data',this.getErrorsInField('firstName'))
         // console.warn(this.state.signInPressStatus)
         if (
             this.validate({
@@ -47,7 +49,7 @@ class Signup extends ValidationComponent {
                 password: { minlength: 3, maxlength: 10, required: true }
             })
         ) {
-            console.warn('--------------------', this.validate)
+            console.log('--------------------', this.validate)
             this._signInAsync();
         }
     }
@@ -86,9 +88,9 @@ class Signup extends ValidationComponent {
         return (
             <ScrollView style={{ flex: 1 }}>
                 <View style={MainView}>
-                    <Field
-                        component={InputField}
-                        name='firstname'
+                    <InputField
+                        // component={InputField}
+                        // name='firstname'
                         fImageSource={require('../assets/image/ic_user.png')}
                         placeholder='First Name'
                         lImageSource={require('../assets/image/ic_cancel.png')}
@@ -97,9 +99,9 @@ class Signup extends ValidationComponent {
                         onPressC={(firstName) => this.setState({ firstName })}
                         error={this.getErrorsInField('firstName')}
                     />
-                    <Field
-                        component={InputField}
-                        name='lastname'
+                    <InputField
+                        // component={InputField}
+                        // name='lastname'
                         fImageSource={require('../assets/image/ic_user.png')}
                         placeholder='Last Name'
                         lImageSource={require('../assets/image/ic_cancel.png')}
@@ -108,10 +110,11 @@ class Signup extends ValidationComponent {
                         onPressC={(lastName) => this.setState({ lastName })}
                         error={this.getErrorsInField('lastName')}
                     />
-                    <Field
-                        component={InputField}
-                        name='address'
+                    <InputField
+                        // component={InputField}
+                        // name='address'
                         fImageSource={require('../assets/image/ic_home.png')}
+                        lImageSource={require('../assets/image/ic_cancel.png')}
                         placeholder='Address'
                         multiLine={true}
                         inputChange={(address) => this.setState({ address })}
@@ -120,7 +123,7 @@ class Signup extends ValidationComponent {
                         error={this.getErrorsInField('address')}
                     />
                     <View style={SwitchMaleFemale}>
-                        <Text style={{ fontSize: 20, color: '#000' }}>Gender: </Text>
+                        <Text style={this.state.signInPressStatus?{ fontSize: 20, color: 'blue' }:{fontSize: 20, color: '#ff16b5'}}>Gender: </Text>
                         <SwitchSigninSignup
                             onChange={(signInPressStatus) => this.setState({ signInPressStatus })}
                             signInPressStatus={this.state.signInPressStatus}
@@ -275,6 +278,6 @@ const styles = StyleSheet.create({
     }
 });
 
-export default reduxForm({
-    singupform: 'singupform',
-})(Signup);
+// export default reduxForm({
+//     singupform: 'singupform',
+// })(Signup);

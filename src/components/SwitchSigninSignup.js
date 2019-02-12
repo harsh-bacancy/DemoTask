@@ -14,12 +14,15 @@ export default class SwitchSigninSignup extends Component {
         let signInPressStatus = true;
         this.setState({ signInPressStatus });
         this.props.onChange(signInPressStatus)
+        console.log('hide--',signInPressStatus)
     }
     _onShowUnderlay = () => {
         let signInPressStatus = false;
         this.setState({ signInPressStatus });
         this.props.onChange(signInPressStatus)
+        console.log('show--',signInPressStatus)
     }
+    
     render() {
         const { signInPressStatus, RightText, LeftText} = this.state
         return (
