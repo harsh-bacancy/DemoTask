@@ -23,7 +23,8 @@ export default class Signup extends ValidationComponent {
             signInPressStatus: false,
             isDateTimePickerVisible: false,
             birthDate: 'Birthdate',
-            setModalVisible: false
+            setModalVisible: false,
+            editable: true
         }
 
     }
@@ -73,7 +74,7 @@ export default class Signup extends ValidationComponent {
         this.setState({ setModalVisible: visible })
     }
     render() {
-        const { birthDate, setModalVisible } = this.state
+        const { birthDate, setModalVisible, editable } = this.state
         const {
             MainView,
             SwitchMaleFemale,
@@ -89,9 +90,8 @@ export default class Signup extends ValidationComponent {
         console.log("-------------------", birthDate)
         return (
             //Main View
-            <ScrollView style={{ flex: 1 }}>
+            <ScrollView style={{ flex: 1 }} keyboardShouldPersistTaps='handled'>
                 {/* modelView start */}
-
                 <Modal
                     animationType="slide"
                     transparent={true}
@@ -100,10 +100,10 @@ export default class Signup extends ValidationComponent {
                         Alert.alert('Modal has been closed.');
                     }}>
                     <TouchableOpacity
-                        style={{ flex: 1,}}
+                        style={{ flex: 1 }}
                         onPress={() => this.setModalVisible(!setModalVisible)}>
                     </TouchableOpacity>
-                    <View style={{ flex: .4, backgroundColor: '#adadad', alignItems: 'center', justifyContent: 'flex-end' }}>
+                    <View style={{ flex: .4, backgroundColor: '#EEE', alignItems: 'center', justifyContent: 'flex-end', borderTopEndRadius: 30, borderTopStartRadius: 30, marginHorizontal: 5, }}>
                         <Text style={{ fontSize: 20, padding: 10 }}>Ex. Example@example.com</Text>
                         <View style={{ height: 40 }}>
 
@@ -135,6 +135,7 @@ export default class Signup extends ValidationComponent {
                         inputValue={this.state.firstName}
                         onPressC={(firstName) => this.setState({ firstName })}
                         error={this.getErrorsInField('firstName')}
+                        editable={editable}
                     />
                     <Field
                         component={InputField}
@@ -146,6 +147,7 @@ export default class Signup extends ValidationComponent {
                         inputValue={this.state.lastName}
                         onPressC={(lastName) => this.setState({ lastName })}
                         error={this.getErrorsInField('lastName')}
+                        editable={editable}
                     />
                     <Field
                         component={InputField}
@@ -158,6 +160,7 @@ export default class Signup extends ValidationComponent {
                         inputValue={this.state.address}
                         onPressC={(address) => this.setState({ address })}
                         error={this.getErrorsInField('address')}
+                        editable={editable}
                     />
 
                     <View style={SwitchMaleFemale}>
@@ -220,6 +223,7 @@ export default class Signup extends ValidationComponent {
                     <View style={ButtonArea}>
                         <TouchableOpacity
                             style={ButtonView}
+
                         >
                             <Text style={ButtonText}>Edit</Text>
                         </TouchableOpacity>

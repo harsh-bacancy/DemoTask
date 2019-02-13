@@ -46,7 +46,7 @@ export default class Signin extends Component {
             ButtonText
         } = styles
         return (
-            <ScrollView>
+            <ScrollView keyboardShouldPersistTaps='handled'>
                 <View style={MainView}>
                     <InputField
                         fImageSource={require('../assets/image/ic_user.png')}
@@ -55,6 +55,8 @@ export default class Signin extends Component {
                         inputChange={(email) => this.setState({ email })}
                         inputValue={this.state.email}
                         onPressC={(email) => this.setState({ email })}
+                        error={this.state.getemail}
+                        editable={true}
                     />
                     <InputField
                         fImageSource={require('../assets/image/ic_password.png')}
@@ -63,7 +65,9 @@ export default class Signin extends Component {
                         inputChange={(password) => this.setState({ password })}
                         inputValue={this.state.password}
                         secureTextEntry={this.state.isPasswordVisible}
-                        onPressC={(isPasswordVisible) => this.setState({ isPasswordVisible: !this.state.isPasswordVisible })}
+                        onPressC={() => this.setState({ isPasswordVisible: !this.state.isPasswordVisible })}
+                        error={'ex.'+this.state.getpassword}
+                        editable={true}
                     />
                     <View style={ToggleSwitchView}>
                         <ToggleSwitch

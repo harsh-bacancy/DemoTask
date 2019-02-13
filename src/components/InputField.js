@@ -11,6 +11,7 @@ export default InputField = ({
     secureTextEntry,
     onPressC,
     error,
+    editable
 }) => {
     const {
         Input,
@@ -41,6 +42,8 @@ export default InputField = ({
                         placeholder={placeholder}
                         multiline={multiLine}
                         secureTextEntry={secureTextEntry}
+                        returnKeyType='done'
+                        editable={editable}
                     />
                     <TouchableOpacity onPress={onPressC}>
                         <Image style={ic_PasswordImage} source={lImageSource} />

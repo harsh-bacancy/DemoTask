@@ -61,4 +61,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default reduxForm()(MainScreen);
+export default reduxForm({})(MainScreen);
