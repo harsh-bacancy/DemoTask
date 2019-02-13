@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, TextInput, TouchableOpacity, Image, StyleSheet, Text, AsyncStorage, ScrollView } from 'react-native'
+import { View, TextInput, TouchableOpacity, Image, StyleSheet, Text, AsyncStorage, ScrollView, Modal } from 'react-native'
 import DateTimePicker from 'react-native-modal-datetime-picker'
 import ValidationComponent from 'react-native-form-validator'
 import moment from 'moment';
@@ -23,9 +23,9 @@ export default class Signup extends ValidationComponent {
             signInPressStatus: false,
             isDateTimePickerVisible: false,
             birthDate: 'Birthdate',
-
+            setModalVisible: false
         }
-        
+
     }
 
     _validateData = () => {
@@ -36,7 +36,7 @@ export default class Signup extends ValidationComponent {
                 : this.setState({ gender: 'Female' })
         }
         console.log(this.state.gender)
-        console.log('here data',this.getErrorsInField('firstName'))
+        console.log('here data', this.getErrorsInField('firstName'))
         // console.warn(this.state.signInPressStatus)
         if (
             this.validate({
@@ -69,8 +69,11 @@ export default class Signup extends ValidationComponent {
         this.setState({ birthDate: mDate })
         this._hideDateTimePicker();
     };
+    setModalVisible(visible) {
+        this.setState({ setModalVisible: visible })
+    }
     render() {
-        const { birthDate } = this.state
+        const { birthDate, setModalVisible } = this.state
         const {
             MainView,
             SwitchMaleFemale,
@@ -85,7 +88,42 @@ export default class Signup extends ValidationComponent {
 
         console.log("-------------------", birthDate)
         return (
+            //Main View
             <ScrollView style={{ flex: 1 }}>
+                {/* modelView start */}
+
+                <Modal
+                    animationType="slide"
+                    transparent={true}
+                    visible={setModalVisible}
+                    onRequestClose={() => {
+                        Alert.alert('Modal has been closed.');
+                    }}>
+                    <TouchableOpacity
+                        style={{ flex: 1,}}
+                        onPress={() => this.setModalVisible(!setModalVisible)}>
+                    </TouchableOpacity>
+                    <View style={{ flex: .4, backgroundColor: '#adadad', alignItems: 'center', justifyContent: 'flex-end' }}>
+                        <Text style={{ fontSize: 20, padding: 10 }}>Ex. Example@example.com</Text>
+                        <View style={{ height: 40 }}>
+
+                        </View>
+                        <TouchableOpacity
+                            onPress={() => {
+                                this.setModalVisible(!setModalVisible);
+                            }}>
+                            <Image
+                                style={ImageView}
+                                source={require('../assets/image/ic_cancel.png')}
+                            />
+                        </TouchableOpacity>
+                        <View style={{ height: 20 }}>
+
+                        </View>
+                    </View>
+                </Modal>
+
+                {/* modelView over */}
                 <View style={MainView}>
                     <Field
                         component={InputField}
@@ -121,9 +159,9 @@ export default class Signup extends ValidationComponent {
                         onPressC={(address) => this.setState({ address })}
                         error={this.getErrorsInField('address')}
                     />
-                    
+
                     <View style={SwitchMaleFemale}>
-                        <Text style={this.state.signInPressStatus?{ fontSize: 20, color: 'blue' }:{fontSize: 20, color: '#ff16b5'}}>Gender: </Text>
+                        <Text style={this.state.signInPressStatus ? { fontSize: 20, color: 'blue' } : { fontSize: 20, color: '#ff16b5' }}>Gender: </Text>
                         <SwitchSigninSignup
                             onChange={(signInPressStatus) => this.setState({ signInPressStatus })}
                             signInPressStatus={this.state.signInPressStatus}
@@ -142,10 +180,12 @@ export default class Signup extends ValidationComponent {
                             value={this.state.email}
 
                         />
-                        <Image
-                            style={ImageView}
-                            source={require('../assets/image/ic_info.png')}
-                        />
+                        <TouchableOpacity onPress={() => this.setModalVisible(true)}>
+                            <Image
+                                style={ImageView}
+                                source={require('../assets/image/ic_info.png')}
+                            />
+                        </TouchableOpacity>
                     </View>
                     <View style={{ width: '90%', justifyContent: 'center', alignItems: 'center', marginBottom: 5, }}>
                         <Text style={{ color: 'red' }}>{this.getErrorsInField('email')}</Text>
