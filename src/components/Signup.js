@@ -50,6 +50,7 @@ export default class Signup extends ValidationComponent {
             })
         ) {
             console.log('--------------------', this.validate)
+            this.setisEditable(!this.state.editable);
             this._signInAsync();
         }
     }
@@ -59,7 +60,7 @@ export default class Signup extends ValidationComponent {
         console.warn(this.state.password)
         await AsyncStorage.setItem(KEY_USER_MAIL, email);
         await AsyncStorage.setItem(KEY_USER_PASSWORD, password);
-        Actions.mainscreen();
+        // Actions.mainscreen();
     };
     _showDateTimePicker = () => this.setState({ isDateTimePickerVisible: true });
 
@@ -73,6 +74,10 @@ export default class Signup extends ValidationComponent {
     setModalVisible(visible) {
         this.setState({ setModalVisible: visible })
     }
+    setisEditable(isEditable) {
+        console.warn(this.state.editable)
+        this.setState({ editable: isEditable })
+    }
     render() {
         const { birthDate, setModalVisible, editable } = this.state
         const {
@@ -82,6 +87,7 @@ export default class Signup extends ValidationComponent {
             PasswordInput,
             ButtonArea,
             ButtonView,
+            ButtonViewDisable,
             ButtonText,
             ImageView,
             DateSelect
@@ -97,10 +103,10 @@ export default class Signup extends ValidationComponent {
                     transparent={true}
                     visible={setModalVisible}
                     onRequestClose={() => {
-                        Alert.alert('Modal has been closed.');
+                        this.setModalVisible(!setModalVisible)
                     }}>
                     <TouchableOpacity
-                        style={{ flex: 1,backgroundColor:'#FFFFFF99' }}
+                        style={{ flex: 1, backgroundColor: '#FFFFFF99' }}
                         onPress={() => this.setModalVisible(!setModalVisible)}>
                     </TouchableOpacity>
                     <View style={{ flex: .4, backgroundColor: '#EEE', alignItems: 'center', justifyContent: 'flex-end', borderTopEndRadius: 30, borderTopStartRadius: 30, marginHorizontal: 5, }}>
@@ -122,7 +128,6 @@ export default class Signup extends ValidationComponent {
                         </View>
                     </View>
                 </Modal>
-
                 {/* modelView over */}
                 <View style={MainView}>
                     <Field
@@ -131,9 +136,9 @@ export default class Signup extends ValidationComponent {
                         fImageSource={require('../assets/image/ic_user.png')}
                         placeholder='First Name'
                         lImageSource={require('../assets/image/ic_cancel.png')}
-                        inputChange={(firstName) => this.setState({ firstName })}
+                        inputChange={(firstName) => { this.setState({ firstName }) }}
                         inputValue={this.state.firstName}
-                        onPressC={(firstName) => this.setState({ firstName })}
+                        onPressC={() => this.setState({ firstName: '' })}
                         error={this.getErrorsInField('firstName')}
                         editable={editable}
                     />
@@ -145,7 +150,7 @@ export default class Signup extends ValidationComponent {
                         lImageSource={require('../assets/image/ic_cancel.png')}
                         inputChange={(lastName) => this.setState({ lastName })}
                         inputValue={this.state.lastName}
-                        onPressC={(lastName) => this.setState({ lastName })}
+                        onPressC={() => this.setState({ lastName: '' })}
                         error={this.getErrorsInField('lastName')}
                         editable={editable}
                     />
@@ -158,7 +163,7 @@ export default class Signup extends ValidationComponent {
                         multiLine={true}
                         inputChange={(address) => this.setState({ address })}
                         inputValue={this.state.address}
-                        onPressC={(address) => this.setState({ address })}
+                        onPressC={() => this.setState({ address: '' })}
                         error={this.getErrorsInField('address')}
                         editable={editable}
                     />
@@ -181,7 +186,7 @@ export default class Signup extends ValidationComponent {
                             placeholder='Email Address'
                             onChangeText={(email) => this.setState({ email })}
                             value={this.state.email}
-
+                            editable={editable}
                         />
                         <TouchableOpacity onPress={() => this.setModalVisible(true)}>
                             <Image
@@ -201,6 +206,7 @@ export default class Signup extends ValidationComponent {
                             onChangeText={(password) => this.setState({ password })}
                             value={this.state.password}
                             secureTextEntry={true}
+                            editable={editable}
                         />
                     </View>
                     <View style={{ width: '90%', justifyContent: 'center', alignItems: 'center', marginBottom: 5, }}>
@@ -222,14 +228,16 @@ export default class Signup extends ValidationComponent {
                     </View>
                     <View style={ButtonArea}>
                         <TouchableOpacity
-                            style={ButtonView}
-
+                            style={!editable ? ButtonView : ButtonViewDisable}
+                            onPress={() => this.setisEditable(!editable)}
+                            disabled={editable}
                         >
                             <Text style={ButtonText}>Edit</Text>
                         </TouchableOpacity>
                         <TouchableOpacity
-                            style={ButtonView}
+                            style={editable ? ButtonView : ButtonViewDisable}
                             onPress={this._validateData}
+                            disabled={!editable}
                         >
                             <Text style={ButtonText}>Save</Text>
 
@@ -292,6 +300,15 @@ const styles = StyleSheet.create({
     },
     ButtonView: {
         backgroundColor: '#005AFF',
+        padding: 15,
+        borderRadius: 50,
+        width: '35%',
+        margin: 30,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    ButtonViewDisable: {
+        backgroundColor: '#AAAAAA',
         padding: 15,
         borderRadius: 50,
         width: '35%',

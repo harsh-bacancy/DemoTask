@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
-import { View, TextInput, Image, Text, StyleSheet, TouchableOpacity, AsyncStorage, ScrollView } from 'react-native'
+import { View, BackHandler, Text, StyleSheet, TouchableOpacity, AsyncStorage, ScrollView, Platform } from 'react-native'
 import ToggleSwitch from 'toggle-switch-react-native'
 import InputField from '../components/InputField'
 import { Actions } from 'react-native-router-flux'
 import { KEY_USER_MAIL, KEY_USER_PASSWORD, } from '../helper/constant'
+import RNExitApp from 'react-native-exit-app'
 
 export default class Signin extends Component {
     constructor(props) {
@@ -54,7 +55,7 @@ export default class Signin extends Component {
                         lImageSource={require('../assets/image/ic_cancel.png')}
                         inputChange={(email) => this.setState({ email })}
                         inputValue={this.state.email}
-                        onPressC={(email) => this.setState({ email })}
+                        onPressC={() => this.setState({ email: '' })}
                         error={this.state.getemail}
                         editable={true}
                     />
@@ -66,7 +67,7 @@ export default class Signin extends Component {
                         inputValue={this.state.password}
                         secureTextEntry={this.state.isPasswordVisible}
                         onPressC={() => this.setState({ isPasswordVisible: !this.state.isPasswordVisible })}
-                        error={'ex.'+this.state.getpassword}
+                        error={'ex.' + this.state.getpassword}
                         editable={true}
                     />
                     <View style={ToggleSwitchView}>
@@ -83,6 +84,7 @@ export default class Signin extends Component {
                     <View style={ButtonArea}>
                         <TouchableOpacity
                             style={ButtonView}
+                            onPress={(Platform.OS == 'ios') ? () => RNExitApp.exitApp() : () => BackHandler.exitApp()}
                         >
                             <Text style={ButtonText}>Cancel</Text>
                         </TouchableOpacity>
