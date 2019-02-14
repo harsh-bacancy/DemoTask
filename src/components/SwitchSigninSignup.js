@@ -1,30 +1,30 @@
 import React, { Component } from 'react'
-import { View, TouchableOpacity, StyleSheet, Text, AsyncStorage } from 'react-native'
+import { View, TouchableOpacity, StyleSheet, Text, PixelRatio } from 'react-native'
 
 export default class SwitchSigninSignup extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
-        this.state={
-            signInPressStatus : props.signInPressStatus,
-            RightText : props.RightText,
-            LeftText : props.LeftText
+        this.state = {
+            signInPressStatus: props.signInPressStatus,
+            RightText: props.RightText,
+            LeftText: props.LeftText
         }
     }
     _onHideUnderlay = () => {
         let signInPressStatus = true;
         this.setState({ signInPressStatus });
         this.props.onChange(signInPressStatus)
-        console.log('hide--',signInPressStatus)
+        console.log('hide--', signInPressStatus)
     }
     _onShowUnderlay = () => {
         let signInPressStatus = false;
         this.setState({ signInPressStatus });
         this.props.onChange(signInPressStatus)
-        console.log('show--',signInPressStatus)
+        console.log('show--', signInPressStatus)
     }
-    
+
     render() {
-        const { signInPressStatus, RightText, LeftText} = this.state
+        const { signInPressStatus, RightText, LeftText } = this.state
         return (
             <View style={styles.TopScreen}>
                 <TouchableOpacity
@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderTopRightRadius: 10,
         borderBottomRightRadius: 10,
-        marginRight: 40
+        marginRight: 30
     },
     Rightbutton: {
         flex: 1,
@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderTopRightRadius: 10,
         borderBottomRightRadius: 10,
-        marginRight: 40
+        marginRight: 30
     },
     LeftbuttonPress: {
         flex: 1,
@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderTopLeftRadius: 10,
         borderBottomLeftRadius: 10,
-        marginLeft: 40
+        marginLeft: 30
 
     },
     Leftbutton: {
@@ -86,18 +86,18 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderTopLeftRadius: 10,
         borderBottomLeftRadius: 10,
-        marginLeft: 40
+        marginLeft: 30
     },
     welcome: {
-        fontSize: 20,
+        fontSize: PixelRatio.get() <= 2 ? 14 : 20,
         textAlign: "center",
-        margin: 10,
+        margin: PixelRatio.get() <= 2 ? 8 : 10,
         color: "#000000"
     },
     welcomePress: {
-        fontSize: 20,
+        fontSize: PixelRatio.get() <= 2 ? 14 : 20,
         textAlign: "center",
-        margin: 10,
+        margin: PixelRatio.get() <= 2 ? 8 : 10,
         color: "#ffffff"
     }
 });

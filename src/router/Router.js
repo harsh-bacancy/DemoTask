@@ -1,5 +1,5 @@
 import React from 'react';
-import { Router, Scene, Stack, } from 'react-native-router-flux';
+import { Router, Scene, Stack, } from 'react-native-router-flux'; 
 import { connect, Provider } from 'react-redux'
 import MainScreen from '../screen/MainScreen'
 import ThankYou from '../screen/ThankYou'

@@ -100,7 +100,7 @@ export default class Signup extends ValidationComponent {
                         Alert.alert('Modal has been closed.');
                     }}>
                     <TouchableOpacity
-                        style={{ flex: 1 }}
+                        style={{ flex: 1,backgroundColor:'#FFFFFF99' }}
                         onPress={() => this.setModalVisible(!setModalVisible)}>
                     </TouchableOpacity>
                     <View style={{ flex: .4, backgroundColor: '#EEE', alignItems: 'center', justifyContent: 'flex-end', borderTopEndRadius: 30, borderTopStartRadius: 30, marginHorizontal: 5, }}>

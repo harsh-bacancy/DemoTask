@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, StyleSheet, } from 'react-native'
+import { View, StyleSheet, Platform } from 'react-native'
 import { reduxForm } from 'redux-form'
 import SwitchSigninSignup from '../components/SwitchSigninSignup'
 import Signin from '../components/Signin'
@@ -42,6 +42,7 @@ const styles = StyleSheet.create({
     MainScreen: {
         flex: 1,
         backgroundColor: '#FFF',
+        paddingTop: Platform.OS == 'ios' ? 30 : 0
     },
     Header: {
         flex: .5,
