@@ -1,13 +1,13 @@
 import React from 'react'
-import { View, TextInput, TouchableOpacity, Image, StyleSheet, Text, AsyncStorage, ScrollView, Modal } from 'react-native'
+import { View, TextInput, TouchableOpacity, Image, Text, AsyncStorage, ScrollView, Modal } from 'react-native'
 import DateTimePicker from 'react-native-modal-datetime-picker'
 import ValidationComponent from 'react-native-form-validator'
 import moment from 'moment';
 import { Field } from 'redux-form'
-import { Actions } from 'react-native-router-flux'
 import InputField from '../components/InputField'
 import SwitchSigninSignup from '../components/SwitchSigninSignup'
 import { KEY_USER_MAIL, KEY_USER_PASSWORD, } from '../helper/constant'
+import styles from '../assets/styles'
 
 
 export default class Signup extends ValidationComponent {
@@ -26,9 +26,7 @@ export default class Signup extends ValidationComponent {
             setModalVisible: false,
             editable: true
         }
-
     }
-
     _validateData = () => {
         // let {signInPressStatus} =this.state
         {
@@ -240,7 +238,6 @@ export default class Signup extends ValidationComponent {
                             disabled={!editable}
                         >
                             <Text style={ButtonText}>Save</Text>
-
                         </TouchableOpacity>
                     </View>
                 </View>
@@ -249,93 +246,3 @@ export default class Signup extends ValidationComponent {
         );
     }
 }
-const styles = StyleSheet.create({
-    MainView: {
-        flex: 1,
-        flexDirection: 'column',
-        backgroundColor: '#FFF',
-        alignItems: 'center',
-        justifyContent: 'center',
-        // backgroundColor : 'red'
-
-    },
-    SwitchMaleFemale: {
-        flexDirection: 'row',
-        width: '90%',
-        alignItems: 'center',
-        justifyContent: 'space-evenly',
-        padding: 10,
-        // backgroundColor: 'red'
-    },
-    EmailInput: {
-        width: '90%',
-        height: 50,
-        // backgroundColor:'red',
-        borderTopColor: 'gray',
-        borderTopWidth: 1,
-        borderBottomColor: 'gray',
-        borderBottomWidth: 1,
-        marginVertical: 10,
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-between'
-    },
-    PasswordInput: {
-        width: '90%',
-        height: 50,
-        // backgroundColor:'red',
-        borderTopColor: 'gray',
-        borderTopWidth: 1,
-        borderBottomColor: 'gray',
-        borderBottomWidth: 1,
-        marginVertical: 10,
-        flexDirection: 'row',
-        alignItems: 'center'
-    },
-    ButtonArea: {
-        flexDirection: 'row',
-        width: '90%',
-        justifyContent: 'space-evenly',
-
-    },
-    ButtonView: {
-        backgroundColor: '#005AFF',
-        padding: 15,
-        borderRadius: 50,
-        width: '35%',
-        margin: 30,
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
-    ButtonViewDisable: {
-        backgroundColor: '#AAAAAA',
-        padding: 15,
-        borderRadius: 50,
-        width: '35%',
-        margin: 30,
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
-    ButtonText: {
-        color: '#FFF'
-    },
-    ImageView: {
-        height: 30,
-        width: 30
-    },
-    DateSelect: {
-        width: '90%',
-        padding: 10,
-        margin: 10,
-        // backgroundColor: 'red',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        borderRadius: 40,
-        borderWidth: 1,
-    }
-});
-
-// export default reduxForm({
-//     singupform: 'singupform',
-// })(Signup);

@@ -5,7 +5,6 @@ import SwitchSigninSignup from '../components/SwitchSigninSignup'
 import Signin from '../components/Signin'
 import Signup from '../components/Signup'
 
-
 class MainScreen extends Component {
     constructor(props) {
         super(props);
@@ -44,22 +43,10 @@ const styles = StyleSheet.create({
         backgroundColor: '#FFF',
         paddingTop: Platform.OS == 'ios' ? 30 : 0
     },
-    Header: {
-        flex: .5,
-        flexDirection: 'row',
-        alignItems: 'center',
-        backgroundColor: 'white',
-        paddingBottom: 10
-    },
     BottomScreen: {
         flex: 1,
         justifyContent: 'center',
     },
-    BackImage: {
-        height: 30,
-        width: 30,
-        margin: 10,
-    }
 });
 
 export default reduxForm({})(MainScreen);

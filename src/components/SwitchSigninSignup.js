@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import { View, TouchableOpacity, StyleSheet, Text, PixelRatio } from 'react-native'
+import styles from '../assets/styles'
+
 
 export default class SwitchSigninSignup extends Component {
     constructor(props) {
@@ -22,7 +24,6 @@ export default class SwitchSigninSignup extends Component {
         this.props.onChange(signInPressStatus)
         console.log('show--', signInPressStatus)
     }
-
     render() {
         const { signInPressStatus, RightText, LeftText } = this.state
         return (
@@ -45,59 +46,3 @@ export default class SwitchSigninSignup extends Component {
         )
     }
 }
-const styles = StyleSheet.create({
-    TopScreen: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#FFF',
-        flexDirection: 'row',
-    },
-    RightbuttonPress: {
-        flex: 1,
-        borderColor: "#005AFF",
-        backgroundColor: "#005AFF",
-        borderWidth: 1,
-        borderTopRightRadius: 10,
-        borderBottomRightRadius: 10,
-        marginRight: 30
-    },
-    Rightbutton: {
-        flex: 1,
-        borderColor: "#005AFF",
-        borderWidth: 1,
-        borderTopRightRadius: 10,
-        borderBottomRightRadius: 10,
-        marginRight: 30
-    },
-    LeftbuttonPress: {
-        flex: 1,
-        borderColor: "#005AFF",
-        backgroundColor: "#005AFF",
-        borderWidth: 1,
-        borderTopLeftRadius: 10,
-        borderBottomLeftRadius: 10,
-        marginLeft: 30
-
-    },
-    Leftbutton: {
-        flex: 1,
-        borderColor: "#005AFF",
-        borderWidth: 1,
-        borderTopLeftRadius: 10,
-        borderBottomLeftRadius: 10,
-        marginLeft: 30
-    },
-    welcome: {
-        fontSize: PixelRatio.get() <= 2 ? 14 : 20,
-        textAlign: "center",
-        margin: PixelRatio.get() <= 2 ? 8 : 10,
-        color: "#000000"
-    },
-    welcomePress: {
-        fontSize: PixelRatio.get() <= 2 ? 14 : 20,
-        textAlign: "center",
-        margin: PixelRatio.get() <= 2 ? 8 : 10,
-        color: "#ffffff"
-    }
-});

@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
-import { View, BackHandler, Text, StyleSheet, TouchableOpacity, AsyncStorage, ScrollView, Platform } from 'react-native'
+import { View, BackHandler, Text, TouchableOpacity, AsyncStorage, ScrollView, Platform } from 'react-native'
 import ToggleSwitch from 'toggle-switch-react-native'
 import InputField from '../components/InputField'
 import { Actions } from 'react-native-router-flux'
 import { KEY_USER_MAIL, KEY_USER_PASSWORD, } from '../helper/constant'
 import RNExitApp from 'react-native-exit-app'
+import styles from '../assets/styles'
 
 export default class Signin extends Component {
     constructor(props) {
@@ -53,7 +54,7 @@ export default class Signin extends Component {
                         fImageSource={require('../assets/image/ic_user.png')}
                         placeholder='Enter User Name or Email'
                         lImageSource={require('../assets/image/ic_cancel.png')}
-                        inputChange={(email) => this.setState({ email })}
+                        inputChange={(email) => this.setState({ email: email })}
                         inputValue={this.state.email}
                         onPressC={() => this.setState({ email: '' })}
                         error={this.state.getemail}
@@ -101,69 +102,3 @@ export default class Signin extends Component {
         );
     }
 }
-const styles = StyleSheet.create({
-    MainView: {
-        flex: 1,
-        flexDirection: 'column',
-        backgroundColor: '#FFF',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    EmailInput: {
-        flexDirection: 'row',
-        width: '90%',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        marginVertical: 10,
-        borderBottomWidth: 2,
-        borderBottomColor: 'gray'
-    },
-    PasswordInput: {
-        flexDirection: 'row',
-        width: '90%',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        marginVertical: 10,
-        borderBottomWidth: 2,
-        borderBottomColor: 'gray'
-    },
-    ic_Image: {
-        height: 20,
-        width: 20,
-        margin: 10
-    },
-    ic_CancleImage: {
-        height: 20,
-        width: 20,
-        margin: 10,
-    },
-    ic_PasswordImage: {
-        height: 20,
-        width: 20,
-        margin: 10,
-    },
-    ToggleSwitchView: {
-        flexDirection: 'row',
-        justifyContent: 'flex-end',
-        width: '90%',
-        marginVertical: 10
-    },
-    ButtonArea: {
-        flexDirection: 'row',
-        width: '90%',
-        justifyContent: 'space-evenly',
-        marginVertical: 40
-    },
-    ButtonView: {
-        backgroundColor: '#005AFF',
-        padding: 15,
-        borderRadius: 50,
-        width: '35%',
-        margin: 30,
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
-    ButtonText: {
-        color: '#FFF'
-    }
-});
