@@ -167,7 +167,7 @@ export default styles = StyleSheet.create({
         marginLeft: 30
     },
     welcome: {
-        fontSize: PixelRatio.get() <= 2 ? 14 : 20,
+        fontSize: PixelRatio.get() <= 2  ? 14 : 20,
         textAlign: "center",
         margin: PixelRatio.get() <= 2 ? 8 : 10,
         color: "#000000"
